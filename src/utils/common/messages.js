@@ -1,0 +1,71 @@
+module.exports = {
+  COMMON_MSG: {
+    FETCHED_SUCCESS: "## fetched successfully.",
+    CREATED_SUCCESS: "## created successfully.",
+    UPDATED_SUCCESS: "## updated successfully.",
+    DELETED_SUCCESS: "## deleted successfully.",
+    ADDED_SUCCESS: "## added successfully.",
+    VERIFIED_SUCCESS: "## verified successfully.",
+    CLONE_SUCCESS: "## clone successfully.",
+    READ_SUCCESS: "## mark as read successfully.",
+    REMOVED_SUCCESS: "## removed successfully.",
+    LIST_NOT_FOUND: "## list not found.",
+    DOES_NOT_EXIST: "## does not exist.",
+    NOT_FOUND: "## not found.",
+    ALREADY_EXISTS: "## already exists.",
+    STATUS_UPDATED_SUCCESS: "## status updated successfully.",
+    ALREADY_VERIFIED: "## Already verified.",
+    INVALID: "Invalid ##.",
+    NOT_VERIFIED: "## not verified.",
+    NOT_AVAILABLE: "## not available.",
+  },
+  // EMAIL
+  EMAIL: {
+    SUBJECTS: {
+      VERIFY_EMAIL: "Verify your email address",
+      RESET_PASSWORD: "Reset your password",
+      REACTIVATE_ACCOUNT: "Reactivate Your Account",
+    },
+    MESSAGES: {
+      VERIFY_EMAIL: "Click the button below to verify your email address.",
+      RESET_PASSWORD: "Click the button below to reset your password.",
+      REACTIVATE_ACCOUNT: "Click the button below to reactivate your account.",
+    },
+  },
+  VERIFICATION_EMAIL_SENT: "Verification email sent successfully.",
+  SOMETHING_WENT_WRONG: "Something went wrong.",
+  PASSWORD_RESET_SUCCESS: "password reset successfully",
+  UNAUTHORIZED_USER: "Unauthorized user.",
+  INVALID_TOKEN: "Invalid token.",
+  INTERNAL_SERVER_ERROR: "Internal server error.",
+  INACTIVE_USER: "Access Denied - you are not authorized to access the portal.",
+  UNVERIFIED_USER: "Unverified user.",
+  MSG_ACCESS_TOKEN_MISSING: "Access token is required.",
+  MSG_TOKEN_EXPIRED: "Token has expired",
+  MSG_INVALID_ACCESS_TOKEN: "Invalid access token",
+  MSG_ACCESS_TOKEN_REFRESHED: "Access token refreshed successfully.",
+  MSG_REFRESH_TOKEN_EXPIRED: "Refresh token has expired.",
+  MSG_INVALID_REFRESH_TOKEN: "Invalid refresh token.",
+  MSG_LINK_EXPIRE:
+    "The verification link has expired. Please request a new verification link.",
+  TOO_MANY_ATTEMPTS: "Too many attempts",
+  // subscription
+  MONTHLY_LIMIT_EXCEEDED:
+    "Monthly event limit (10) reached. Upgrade to yearly for unlimited.",
+  TRIAL_PERIOD_EXPIRED: "Trial period expired. Subscribe to continue.",
+  EVENT_CREATION_RESTRICTED:
+    "Event creation is restricted. Please subscribe to continue.",
+  // email-Messages
+  MSG_VERIFY_EMAIL: "Please verify your email address.",
+  MSG_RESET_PASSWORD_EMAIL_SENT: "Reset password email sent successfully.",
+  MSG_MODIFICATION_RESTRICTED: "Cannot ##, because there are existing @@.",
+  // http-Messages
+  MSG_SUCCESS: "Operation completed successfully.",
+  MSG_CREATED: "Resource created successfully.",
+  MSG_NO_CONTENT: "No content to return.",
+  MSG_BAD_REQUEST: "Bad request. Please check your input.",
+  MSG_NOT_FOUND: "Resource not found.",
+  MSG_INTERNAL_SERVER_ERROR: "Internal server error. Please try again later.",
+  MSG_NO_CHANGES_MADE: "No changes were made to the request.",
+  MSG_INVALID_EXPIRE_OTP: "Invalid or expired OTP",
+};

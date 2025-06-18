@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      <%= emailType === 'reactivation' ? 'Reactivate Account' : 'Verify Email' %>
+    </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        padding: 20px 0;
+      }
+      .email-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+      }
+      .header {
+        background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+        color: #fff;
+        text-align: center;
+        padding: 35px 20px;
+      }
+      .header h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+      .header p {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+      .content {
+        padding: 30px 25px;
+        text-align: center;
+      }
+      .greeting {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #2c3e50;
+      }
+      .message {
+        font-size: 15px;
+        color: #555;
+        margin-bottom: 25px;
+        line-height: 1.6;
+      }
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+        color: #fff;
+        padding: 14px 30px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 50px;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: background 0.3s ease;
+      }
+      .cta-button:hover {
+        background: linear-gradient(135deg, #5a6de0, #6b419c);
+      }
+      .security-info {
+        background-color: #fef7e0;
+        border-left: 4px solid #fbbc04;
+        padding: 15px 20px;
+        margin: 25px 0;
+        border-radius: 0 4px 4px 0;
+      }
+      .security-info p {
+        font-size: 14px;
+        color: #b7720d;
+        margin: 0;
+      }
+      .footer {
+        background-color: #f8f9fa;
+        padding: 25px 30px;
+        text-align: center;
+        border-top: 1px solid #e8eaed;
+      }
+      .footer p {
+        font-size: 12px;
+        color: #5f6368;
+        margin: 5px 0;
+      }
+      .footer a {
+        color: #4285f4;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
+      @media (max-width: 600px) {
+        .content {
+          padding: 25px 15px;
+        }
+        .cta-button {
+          padding: 12px 25px;
+          font-size: 13px;
+        }
+        .footer {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-container">
+      <div class="header">
+        <h1><%= emailType === 'reactivation' ? 'Welcome Back!' : 'Verify Your Email' %></h1>
+        <p><%= emailType === 'reactivation' ? 'Let’s reactivate your account' : 'Complete your signup in one click' %></p>
+      </div>
+      <div class="content">
+        <div class="greeting">Hello there 👋</div>
+        <div class="message">
+          <%= emailType === 'reactivation' ? 'We noticed you’ve been away. Click below to reactivate your account instantly.' : 'Thanks for signing up! Just click the button below to verify your email address.' %>
+        </div>
+        <a href="<%= verificationUrl || '#' %>" class="cta-button">
+          <%= emailType === 'reactivation' ? 'Reactivate Account' : 'Verify Email' %>
+        </a>
+        <div class="security-info">
+          <p><strong>Important:</strong> This link expires in 1 hour and can only be used once.</p>
+        </div>
+      </div>
+      <div class="footer">
+        <p>If you didn't request this, please ignore this email or <a href="#">contact support</a></p>
+        <p>© 2025 Your Company. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>
