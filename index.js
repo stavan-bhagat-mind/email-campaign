@@ -1,8 +1,9 @@
-require('module-alias/register'); 
-require('./moduleAlias.js') 
+require("module-alias/register");
+require("./moduleAlias.js");
 const express = require("express");
 const database = require("./src/config/database");
 const indexRoutes = require("./src/routers");
+require("./src/crons/index.cron");
 
 database();
 

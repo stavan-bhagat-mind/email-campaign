@@ -11,7 +11,6 @@ module.exports = {
       RATE: 2,
     },
 
-    
     LOGIN: {
       REQUEST: 5,
       RATE: 2,

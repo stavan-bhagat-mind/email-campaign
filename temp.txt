@@ -1,0 +1,81 @@
+# GLOBAL
+PORT=8000
+BASEURL=http://192.168.1.237:8000
+
+# JWT
+JWT_SECRET=secret
+JWT_EXPIRY_TIME=2h
+JWT_REFRESH_KEY=refresh
+JWT_REFRESH_EXPIRE_TIME=30d
+
+#DATABASE
+MONGO_URI=mongodb+srv://stavan_bhagat:1nsGqc1UVOxAxhpi@cluster0.ywzht.mongodb.net/email-campaign?retryWrites=true&w=majority&appName=Cluster0
+
+#verification
+VERIFY_SECRET=veri@123
+VERIFY_EXPIRY_TIME=1h
+
+# EMAIL
+EMAIL_USER=bhagatstavan7@gmail.com
+EMAIL_PASS=dhml ejpc spol zyzl
+
+#
+DEFAULT_REQUEST_LIMITS_BY_IP=3
+DEFAULT_REQUEST_LIMITS_BY_TOKEN=2
+DEFAULT_RATE_LIMIT_DURATION=1
+
+
+7359373596
+async function uploadCSVRecipientsHandler(req, res) {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "CSV file is required." });
+    }
+
+    const recipients = [];
+
+    fs.createReadStream(req.file.path)
+      .pipe(csv())
+      .on("data", (row) => {
+        recipients.push({
+          user: req.userId,
+          firstName: row.firstName,
+          lastName: row.lastName,
+          email: row.email,
+          contactNumber: row.contactNumber,
+        });
+      })
+      .on("end", async () => {
+        const inserted = await Models.Recipient.insertMany(recipients, {
+          ordered: false,
+        });
+
+        return res.status(201).json({
+          message: "Recipients uploaded successfully",
+          count: inserted.length,
+        });
+      })
+      .on("error", (err) => {
+        console.error("CSV Parse Error:", err);
+        return res.status(500).json({
+          message: "Failed to parse CSV",
+          error: err.message,
+        });
+      });
+  } catch (error) {
+    console.error("Upload error:", error);
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
+  }
+}
+
+const csv = require("csv-parser");
+const fs = require("fs");
+-----
+userRouter.post(
+  "/upload-recipients",
+  authMiddleware,
+  singleUpload("file"),
+  uploadCSVRecipientsHandler
+);

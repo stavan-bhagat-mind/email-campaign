@@ -4,7 +4,7 @@ const { STATUS } = require("@commonUtils/constants");
 
 const recipientSchema = new Schema(
   {
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -24,7 +24,7 @@ const recipientSchema = new Schema(
       required: true,
       lowercase: true,
       trim: true,
-        
+
       match: [
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         "Please fill a valid email address",
@@ -33,11 +33,10 @@ const recipientSchema = new Schema(
     status: {
       type: String,
       enum: Object.values(STATUS),
-      default: "active",
+      default: STATUS.ACTIVE,
     },
     contactNumber: {
       type: String,
-       
       match: [/^[0-9]{10}$/, "Please enter a valid 10-digit phone number"],
     },
     deletedAt: {
@@ -47,7 +46,6 @@ const recipientSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: false,
   }
 );
 

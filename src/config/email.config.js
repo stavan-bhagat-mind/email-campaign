@@ -20,7 +20,6 @@ const transporter = nodemailer.createTransport({
 // Common assets
 const assets = {
   logo: IMAGE_URL.APP_LOGO,
-  subscription: IMAGE_URL.SUBSCRIPTION.SUBSCRIPTION_MAIN,
   supportUrl: LINKS.SUPPORT,
   appName: APP.NAME,
 };
@@ -117,7 +116,38 @@ const sendResetPasswordEmail = async (email, resetToken, userName) => {
   }
 };
 
+/**
+ * Send email for campaign
+ * @param {string} to - Recipient email
+ * @param {string} subject - Email subject
+ * @param {string} html - Pre-rendered email content (from campaign)
+ */
+const sendCampaignEmail = async (to, subject, html, campaignLogId) => {
+  try {
+    const trackedHtml = injectTrackingPixel(html, campaignLogId);
+    await transporter.sendMail({
+      to,
+      subject,
+      html: trackedHtml,
+    });
+    console.log("html", trackedHtml);
+    console.log(`Campaign email sent to ${to}`);
+    return true;
+  } catch (error) {
+    console.error(`Error sending campaign email to ${to}:`, error);
+    throw error;
+  }
+};
+
+const injectTrackingPixel = (html, campaignLogId) => {
+  const trackingPixelUrl = `${process.env.BASEURL}/email-campaign/user/email-track/${campaignLogId}`;
+  console.log("Tracking Pixel URL:", trackingPixelUrl);
+  const pixel = `<img src="${trackingPixelUrl}" width="1" height="1" style="display:none;" />`;
+  return `<html> <body>${html}<br/>${pixel}</body></html>`;
+};
+
 module.exports = {
   sendVerificationEmail,
   sendResetPasswordEmail,
+  sendCampaignEmail,
 };
