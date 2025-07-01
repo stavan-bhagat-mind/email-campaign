@@ -1,7 +1,7 @@
 # GLOBAL
 PORT=8000
 BASEURL=http://192.168.1.237:8000
-
+BASEURL=https://spwcpm43-8000.inc1.devtunnels.ms
 # JWT
 JWT_SECRET=secret
 JWT_EXPIRY_TIME=2h
@@ -23,7 +23,6 @@ EMAIL_PASS=dhml ejpc spol zyzl
 DEFAULT_REQUEST_LIMITS_BY_IP=3
 DEFAULT_REQUEST_LIMITS_BY_TOKEN=2
 DEFAULT_RATE_LIMIT_DURATION=1
-
 
 7359373596
 async function uploadCSVRecipientsHandler(req, res) {

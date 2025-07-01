@@ -4,6 +4,7 @@ const express = require("express");
 const database = require("./src/config/database");
 const indexRoutes = require("./src/routers");
 require("./src/crons/index.cron");
+// require('./src/config/sendGrid.config.js')
 
 database();
 
@@ -11,6 +12,10 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(express.json());
+app.use(
+  "/email-campaign/user/webhooks/sendgrid",
+  express.raw({ type: "application/json" })
+);
 app.use(express.urlencoded());
 
 // CORS

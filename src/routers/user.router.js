@@ -15,6 +15,7 @@ const {
   sendCampaignHandler,
   getCampaignHandler,
   emailTrackingHandler,
+  sendgridEventHandler,
 } = require("../modules/user/controller/user.controller");
 const { singleUpload } = require("../config/multer.config");
 
@@ -64,5 +65,6 @@ userRouter.post(
 );
 userRouter.get("/campaign/:campaignId", authMiddleware, getCampaignHandler);
 userRouter.get("/email-track/:campaignLogId", emailTrackingHandler);
+userRouter.post("/webhooks/sendgrid", sendgridEventHandler);
 
 module.exports = userRouter;

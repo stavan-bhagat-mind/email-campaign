@@ -30,9 +30,20 @@ const campaignLogsSchema = new Schema(
       type: Number,
       default: 0,
     },
+
+    firstOpenedAt: {
+      type: Date,
+      default: null,
+      description:
+        "When the email was first opened (different from lastOpenedAt)",
+    },
+
     lastOpenedAt: {
       type: Date,
       default: null,
+    },
+    messageId: {
+      type: String,
     },
     eventId: {
       type: String,
@@ -40,6 +51,42 @@ const campaignLogsSchema = new Schema(
     deletedAt: {
       type: Date,
       default: null,
+    },
+    //
+    totalPixelLoads: {
+      type: Number,
+      default: 0,
+      description:
+        "Total number of times tracking pixel was loaded (includes forwards, previews, etc.)",
+    },
+    trackingLog: [
+      {
+        timestamp: {
+          type: Date,
+          required: true,
+          default: Date.now,
+        },
+        ip: {
+          type: String,
+          default: null,
+        },
+        userAgent: {
+          type: String,
+          default: null,
+        },
+        countedAsOpen: {
+          type: Boolean,
+          default: false,
+          description:
+            "Whether this pixel load was counted as a legitimate open",
+        },
+      },
+    ],
+    uniqueOpens: {
+      type: Number,
+      default: 0,
+      description:
+        "Number of unique opens (rate-limited, more accurate than 'opened')",
     },
   },
   {

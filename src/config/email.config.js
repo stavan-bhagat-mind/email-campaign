@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 const path = require("path");
@@ -124,7 +125,7 @@ const sendResetPasswordEmail = async (email, resetToken, userName) => {
  */
 const sendCampaignEmail = async (to, subject, html, campaignLogId) => {
   try {
-    const trackedHtml = injectTrackingPixel(html, campaignLogId);
+    const trackedHtml = injectTrackingPixel(html, campaignLogId, to);
     await transporter.sendMail({
       to,
       subject,
@@ -139,8 +140,15 @@ const sendCampaignEmail = async (to, subject, html, campaignLogId) => {
   }
 };
 
-const injectTrackingPixel = (html, campaignLogId) => {
-  const trackingPixelUrl = `${process.env.BASEURL}/email-campaign/user/email-track/${campaignLogId}`;
+const injectTrackingPixel = (html, campaignLogId, email) => {
+  const secret = process.env.TRACKING_SECRET;
+  const data = `${email}|${campaignLogId}`;
+  const hash = crypto.createHmac("sha256", secret).update(data).digest("hex");
+  const trackingPixelUrl = `${
+    process.env.BASEURL
+  }/email-campaign/user/email-track/${campaignLogId}?email=${encodeURIComponent(
+    email
+  )}&sig=${hash}`;
   console.log("Tracking Pixel URL:", trackingPixelUrl);
   const pixel = `<img src="${trackingPixelUrl}" width="1" height="1" style="display:none;" />`;
   return `<html> <body>${html}<br/>${pixel}</body></html>`;
